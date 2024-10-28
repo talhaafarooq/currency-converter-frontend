@@ -1,0 +1,8 @@
+:root {
+    --gold: #ffd700;
+}
+
+.active-link {
+    color: var(--gold) !important;
+    font-weight: bold;
+}
