@@ -30,7 +30,7 @@ function GuestNavbar() {
                     </li>
                     <li className="nav-item">
                         <NavLink
-                            to="/link"
+                            to="/login"
                             className={({ isActive }) => isActive ? "nav-link active-link" : "nav-link"}
                         >
                             Login

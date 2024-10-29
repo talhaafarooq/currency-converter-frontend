@@ -75,9 +75,9 @@ const CurrencyConverter = () => {
 
     return (
         <div className="container my-5">
-            <div className="card" style={{ boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}>
-                <div className="card-header bg-primary text-white text-center">
-                    <h4>Currency Converter</h4>
+            <div className="card" style={{ boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px' }}>
+                <div className="card-header bg-info text-center">
+                    <h3 className='card-title'>Currency Converter</h3>
                 </div>
                 <div className="card-body">
                     <form onSubmit={handleConvert}>
@@ -142,7 +142,7 @@ const CurrencyConverter = () => {
                             )}
                         </div>
 
-                        <button type="submit" className="btn btn-primary w-100" disabled={loading}>
+                        <button type="submit" className="btn btn-info w-100" disabled={loading}>
                             {loading ? 'Converting...' : 'Convert'}
                         </button>
                     </form>
