@@ -33,8 +33,21 @@ const AlertProvider = (props) => {
         });
     };
 
+    const confirmAction = (text, confirmText) => {
+        return Swal.fire({
+            title: "Are You Sure?",
+            text: text,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: confirmText,
+            cancelButtonText: "No, stay here!",
+            confirmButtonColor: '#28A745',
+            cancelButtonColor: '#DC3545',
+        });
+    };
+
     return (
-        <AlertContext.Provider value={{ alertSuccess, alertFailure }}>
+        <AlertContext.Provider value={{ alertSuccess, alertFailure, confirmAction }}>
             {props.children}
         </AlertContext.Provider>
     );

@@ -1,8 +1,8 @@
 import React, { createContext } from 'react';
 
-const LocalStorageContext = createContext();
+const AuthContext = createContext();
 
-function LocalStorageProvider(props) {
+function AuthProvider(props) {
     const setAuthToken = (value) => {
         localStorage.setItem('authToken', value);
     }
@@ -15,10 +15,10 @@ function LocalStorageProvider(props) {
     }
 
     return (
-        <LocalStorageContext.Provider value={{ setAuthToken, getAuthToken, removeAuthToken }}>
+        <AuthContext.Provider value={{ setAuthToken, getAuthToken, removeAuthToken }}>
             {props.children}
-        </LocalStorageContext.Provider>
+        </AuthContext.Provider>
     )
 }
 
-export { LocalStorageContext, LocalStorageProvider };
+export { AuthContext, AuthProvider };

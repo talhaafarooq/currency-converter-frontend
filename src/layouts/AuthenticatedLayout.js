@@ -3,11 +3,11 @@ import { useNavigate } from 'react-router-dom';
 // Import components
 import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';
-import { LocalStorageContext } from '../context/LocalStorageContext';
+import { AuthContext } from '../context/AuthContext';
 
 function AuthenticatedLayout(prop) {
     const Component = prop.component;
-    const { getAuthToken } = useContext(LocalStorageContext);
+    const { getAuthToken } = useContext(AuthContext);
     const navigate = useNavigate();
 
     useEffect(() => {

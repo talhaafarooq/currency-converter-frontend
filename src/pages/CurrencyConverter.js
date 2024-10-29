@@ -21,7 +21,7 @@ const CurrencyConverter = () => {
     // Fetch available currencies
     const fetchCurrencies = async () => {
         try {
-            const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/currencies`);
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/currencies?type=1`);
             const result = await response.json();
             // console.log("data",result.data);
             

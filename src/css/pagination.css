@@ -1,0 +1,23 @@
+.pagination {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.pagination-list {
+    list-style: none;
+    padding: 0;
+}
+
+.pagination-item {
+    display: inline;
+    margin: 0 5px;
+}
+
+.pagination-item.active button {
+    font-weight: bold;
+}
+
+.btn-link {
+    text-decoration: none;
+    color: #007bff;
+}

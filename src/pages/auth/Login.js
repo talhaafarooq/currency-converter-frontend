@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AlertContext } from '../../context/AlertContext';
-import { LocalStorageContext } from '../../context/LocalStorageContext';
+import { AuthContext } from '../../context/AuthContext';
 
 function Login() {
     const [user, setUser] = useState({
@@ -14,7 +14,7 @@ function Login() {
 
     // Context API
     const { alertSuccess } = useContext(AlertContext);
-    const { setAuthToken,getAuthToken } = useContext(LocalStorageContext);
+    const { setAuthToken,getAuthToken } = useContext(AuthContext);
 
     // Check if the user is already logged in
     useEffect(() => {

@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import '../css/GuestNavbar.css';
-import { LocalStorageContext } from '../context/LocalStorageContext';
+import { AuthContext } from '../context/AuthContext';
 
 function GuestNavbar() {
-    const { removeAuthToken,getAuthToken } = useContext(LocalStorageContext);
+    const { removeAuthToken,getAuthToken } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleLogout = () => {

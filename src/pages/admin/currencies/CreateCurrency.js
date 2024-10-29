@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { AlertContext } from '../../../context/AlertContext';
-import { LocalStorageContext } from '../../../context/LocalStorageContext';
+import { AuthContext } from '../../../context/AuthContext';
 
 function CreateCurrency() {
     const [currency, setCurrency] = useState({
@@ -13,7 +13,7 @@ function CreateCurrency() {
 
     // Context API
     const { alertSuccess, alertFailure } = useContext(AlertContext);
-    const { getAuthToken } = useContext(LocalStorageContext);
+    const { getAuthToken } = useContext(AuthContext);
 
     const handleChange = (e) => {
         setCurrency({ ...currency, [e.target.name]: e.target.value });

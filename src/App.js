@@ -12,7 +12,7 @@ import AuthenticatedLayout from './layouts/AuthenticatedLayout';
 
 // Context APi
 import { AlertProvider } from './context/AlertContext';
-import { LocalStorageProvider } from './context/LocalStorageContext';
+import { AuthProvider } from './context/AuthContext';
 
 // Admin Routes
 import Dashboard from './pages/admin/Dashboard';
@@ -29,7 +29,7 @@ function App() {
     return (
         <Fragment>
             <AlertProvider>
-                <LocalStorageProvider>
+                <AuthProvider>
                     <BrowserRouter>
                         <Routes>
                             <Route path='/' element={<GuestLayout component={CurrencyConverter} />} />
@@ -55,7 +55,7 @@ function App() {
                             <Route path="*" element={<NotFound />} />
                         </Routes>
                     </BrowserRouter>
-                </LocalStorageProvider>
+                </AuthProvider>
             </AlertProvider>
         </Fragment>
     );
