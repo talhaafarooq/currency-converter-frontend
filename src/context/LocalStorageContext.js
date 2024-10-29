@@ -3,15 +3,15 @@ import React, { createContext } from 'react';
 const LocalStorageContext = createContext();
 
 function LocalStorageProvider(props) {
-    const setAuthToken = (token, value) => {
-        localStorage.setItem(token, value);
+    const setAuthToken = (value) => {
+        localStorage.setItem('authToken', value);
     }
-    const getAuthToken = (token) => {
-        return localStorage.getItem(token);
+    const getAuthToken = () => {
+        return localStorage.getItem('authToken');
     }
 
-    const removeAuthToken = (token) => {
-        localStorage.removeItem(token);
+    const removeAuthToken = () => {
+        localStorage.removeItem('authToken');
     }
 
     return (

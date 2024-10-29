@@ -1,8 +1,19 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
 import '../css/GuestNavbar.css';
+import { LocalStorageContext } from '../context/LocalStorageContext';
 
 function GuestNavbar() {
+    const { removeAuthToken,getAuthToken } = useContext(LocalStorageContext);
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        removeAuthToken(); 
+        navigate('/login'); // Redirect to login page after logout
+    };
+
+    const isAuthenticated = !!getAuthToken(); // Check if the user is authenticated
+
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <NavLink className="navbar-brand" to="/">CurrencyExchangerApp</NavLink>
@@ -28,18 +39,29 @@ function GuestNavbar() {
                             Currency Converter
                         </NavLink>
                     </li>
-                    <li className="nav-item">
-                        <NavLink
-                            to="/login"
-                            className={({ isActive }) => isActive ? "nav-link active-link" : "nav-link"}
-                        >
-                            Login
-                        </NavLink>
-                    </li>
+                    {isAuthenticated ? (
+                        <li className="nav-item">
+                            <button
+                                className="nav-link btn btn-link"
+                                onClick={handleLogout}
+                            >
+                                Logout
+                            </button>
+                        </li>
+                    ) : (
+                        <li className="nav-item">
+                            <NavLink
+                                to="/login"
+                                className={({ isActive }) => isActive ? "nav-link active-link" : "nav-link"}
+                            >
+                                Login
+                            </NavLink>
+                        </li>
+                    )}
                 </ul>
             </div>
         </nav>
     );
 }
 
-export default GuestNavbar
+export default GuestNavbar;

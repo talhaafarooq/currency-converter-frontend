@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AlertContext } from '../../context/AlertContext';
 import { LocalStorageContext } from '../../context/LocalStorageContext';
@@ -14,13 +14,20 @@ function Login() {
 
     // Context API
     const { alertSuccess } = useContext(AlertContext);
-    const { setAuthToken } = useContext(LocalStorageContext);
+    const { setAuthToken,getAuthToken } = useContext(LocalStorageContext);
 
-
+    // Check if the user is already logged in
+    useEffect(() => {
+        const token = getAuthToken(); // Adjust the token key as needed
+        if (token) {
+            navigate('/admin/dashboard'); // Redirect to dashboard if token exists
+        }
+    }, [navigate]);
 
     const handleChange = (e) => {
         setUser({ ...user, [e.target.name]: e.target.value });
-    }
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsLoading(true);
@@ -35,30 +42,27 @@ function Login() {
             });
 
             const result = await response.json();
-            if (result.statusCode == 200) {
-                setAuthToken('authToken', result.data.token);
+            if (result.statusCode === 200) {
+                setAuthToken(result.data.token);
                 alertSuccess(result.message);
                 setIsLoading(false);
                 navigate('/admin/dashboard');
-            } else if (result.statusCode == 404) {
+            } else if (result.statusCode === 404) {
                 setValidationError({ password: result.message });
                 setIsLoading(false);
-            }
-            else {
-                if (result.statusCode == 422) {
-                    setValidationError(result.data);
-                    setIsLoading(false);
-                }
+            } else if (result.statusCode === 422) {
+                setValidationError(result.data);
+                setIsLoading(false);
             }
         } catch (err) {
             console.log(err);
             setIsLoading(false);
         }
-    }
+    };
+
     return (
         <React.Fragment>
-            {/* Registration form start */}
-
+            {/* Login form start */}
             <form onSubmit={handleSubmit} className='mt-5'>
                 <div className="container">
                     <div className="row">
@@ -70,12 +74,26 @@ function Login() {
                                 <div className="card-body">
                                     <div className="form-group">
                                         <label>Email</label>
-                                        <input type="email" name="email" id="email" className="form-control" onChange={handleChange} required />
+                                        <input 
+                                            type="email" 
+                                            name="email" 
+                                            id="email" 
+                                            className="form-control" 
+                                            onChange={handleChange} 
+                                            required 
+                                        />
                                         {validationError.email ? <span style={{ color: "red" }}>{validationError.email}</span> : null}
                                     </div>
                                     <div className="form-group">
                                         <label>Password</label>
-                                        <input type="text" name="password" id="password" className="form-control" onChange={handleChange} />
+                                        <input 
+                                            type="password" 
+                                            name="password" 
+                                            id="password" 
+                                            className="form-control" 
+                                            onChange={handleChange} 
+                                            required 
+                                        />
                                         {validationError.password ? <span style={{ color: "red" }}>{validationError.password}</span> : null}
                                     </div>
                                 </div>
@@ -93,9 +111,9 @@ function Login() {
                     </div>
                 </div>
             </form>
-            {/* Registration from end */}
-        </React.Fragment >
-    )
+            {/* Login form end */}
+        </React.Fragment>
+    );
 }
 
 export default Login;

@@ -23,6 +23,8 @@ const CurrencyConverter = () => {
         try {
             const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/currencies`);
             const result = await response.json();
+            // console.log("data",result.data);
+            
 
             if (result.statusCode === 200) {
                 setCurrencies(result.data);
